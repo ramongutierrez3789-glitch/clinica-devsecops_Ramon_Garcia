@@ -9,11 +9,12 @@ const db = mysql.createConnection({
   database: 'clinica'
 });
 
-
 app.get('/pacientes/:id', (req, res) => {
-  const consulta = "SELECT * FROM pacientes WHERE id = " + req.params.id;
-  db.query(consulta, (err, filas) => res.json(filas));
+  db.query(
+    "SELECT * FROM pacientes WHERE id = ?",
+    [req.params.id],
+    (err, filas) => res.json(filas)
+  );
 });
-
 
 app.listen(3000);
